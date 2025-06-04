@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-  workflow_dispatch:
 
 jobs:
   deploy:
@@ -13,12 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Download Supabase CLI
+      - name: Install Supabase CLI (.deb)
         run: |
-          curl -L https://github.com/supabase/cli/releases/download/v1.157.2/supabase_1.157.2_linux_amd64.tar.gz -o supabase.tar.gz
-          tar -xvzf supabase.tar.gz
-          chmod +x supabase
-          sudo mv supabase /usr/local/bin/supabase
+          wget https://github.com/supabase/cli/releases/download/v1.157.2/supabase_1.157.2_amd64.deb
+          sudo dpkg -i supabase_1.157.2_amd64.deb
 
       - name: Supabase Login
         run: supabase login --token ${{ secrets.SUPABASE_ACCESS_TOKEN }}
