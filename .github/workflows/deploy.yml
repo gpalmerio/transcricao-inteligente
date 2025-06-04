@@ -3,19 +3,20 @@ name: Deploy Supabase Function
 on:
   push:
     branches:
-      - master
+      - master  # ou "main", dependendo do nome do seu branch
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-      - name: Install Supabase CLI (.deb)
+      - name: Install Supabase CLI
         run: |
-          wget https://github.com/supabase/cli/releases/download/v1.157.2/supabase_1.157.2_amd64.deb
-          sudo dpkg -i supabase_1.157.2_amd64.deb
+          wget https://github.com/supabase/cli/releases/download/v1.130.3/supabase_1.130.3_amd64.deb
+          sudo dpkg -i supabase_1.130.3_amd64.deb
 
       - name: Supabase Login
         run: supabase login --token ${{ secrets.SUPABASE_ACCESS_TOKEN }}
