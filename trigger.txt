@@ -1,1 +1,2 @@
 # deploy automático
+# trigger supabase deploy
